@@ -11,9 +11,9 @@ public class ReadCensus
    public static void main(String[] args) throws IOException
    {
       State s = new State();
-      ArrayList<Float> population = new ArrayList<Float>();
-      ArrayList<Float> childPopulation = new ArrayList<Float>();
-      ArrayList<Float> childPovertyPopulation = new ArrayList<Float>();
+      ArrayList<Integer> population = new ArrayList<Integer>();
+      ArrayList<Integer> childPopulation = new ArrayList<Integer>();
+      ArrayList<Integer> childPovertyPopulation = new ArrayList<Integer>();
       
       Scanner input = new Scanner(System.in);
       
@@ -35,16 +35,27 @@ public class ReadCensus
          
          while( ( record = fileInput.readLine() ) !=  null)
          {
-            String stateId = record.substring(1, 3);
+            //int stateId = Integer.parseInt(record.substring(1, 3));
+            String strStateId = record.substring(0, 3);
+            int stateId = Integer.parseInt(strStateId.trim() );
             //float districtId = Float.parseFloat( record.substring(4, 9) );
             //String districtName = record.substring(10, 82);
-            float districtPop = Float.parseFloat( record.substring(83, 91));
+            String strDistrictPop = record.substring(83, 91);
+            int districtPop = Integer.parseInt( strDistrictPop.trim() );
             population.add(districtPop); //add districtPop value to ArrayList
-            float districtChildPop = Float.parseFloat( record.substring(92, 100));
+            String strDistrictChildPop = record.substring(92, 100);
+            int districtChildPop = Integer.parseInt( strDistrictChildPop.trim());
             childPopulation.add(districtChildPop);
-            float districtChildPovertyPop = Float.parseFloat( record.substring(101, 109));
+            String strDistrictChildPovertyPop = record.substring(101, 109);
+            int districtChildPovertyPop = Integer.parseInt( strDistrictChildPovertyPop.trim());
             childPovertyPopulation.add(districtChildPovertyPop);
             //String dataTag = record.substring(110, 131);
+            
+            System.out.print( stateId );
+            System.out.print( "\t" + districtPop );
+            System.out.print( "\t" + districtChildPop );
+            System.out.println( "\t" + districtChildPovertyPop );
+            
          }
          fileInput.close();
          
@@ -54,7 +65,7 @@ public class ReadCensus
       }
       
       
-      Integer sumPopulation[] = new Integer[population.size()]; //create new array
+      /*Integer sumPopulation[] = new Integer[population.size()]; //create new array
       sumPopulation = population.toArray(sumPopulation); //convert ArrayList to array
       
       int totalPop = 0;
@@ -64,7 +75,7 @@ public class ReadCensus
          totalPop += i; //sum population values
       }
       
-      System.out.println( "total pop: " + totalPop );
+      System.out.println( "total pop: " + totalPop );*/
       
    }
    
